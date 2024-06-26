@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:flutter/widgets.dart';
+
 void main()
 {
   runApp(mainpage());
@@ -13,11 +15,156 @@ class mainpage extends StatefulWidget {
 }
 
 class _mainpageState extends State<mainpage> {
+  Color dice_color=Colors.white;
   var random=Random();
-  var turn='RED';
+  var turn='red';
   var home='',rolled='Nobody';
   int red_position=58,blue_position=58,green_position=58,yellow_position=58;
   int dice=7;
+  void next_turn()
+  {
+    if(green_position==57&&red_position==57&&yellow_position==57&&blue_position==57)
+    {
+        turn='white';
+    }
+    else
+    {
+      if(turn=='red')
+      {
+          if(blue_position!=57)
+          {
+            turn='blue';
+          }
+          else 
+          {
+            if(yellow_position!=57)
+            {
+              turn ='yellow';
+            }
+            else
+            {
+              if(green_position!=57)
+              {
+                turn="green";
+              }
+              else{
+                turn='red';
+              }
+            }
+          }
+        }
+
+
+        else if(turn=='blue')
+        {
+          if(yellow_position!=57)
+            {
+              turn ='yellow';
+            }
+            else
+            {
+              if(green_position!=57)
+              {
+                turn="green";
+              }
+              else{
+                if(red_position!=57)
+                {
+                  turn='red';
+                }
+                else{
+                  turn ='blue';
+                }
+              }
+            }
+        }
+
+
+        else if(turn=='yellow')
+        {
+          if(green_position!=57)
+              {
+                turn="green";
+              }
+              else
+              {
+                if(red_position!=57)
+                {
+                  turn='red';
+                }
+                else{
+                  if(blue_position!=57)
+                  {
+                    turn='blue';
+                  }
+                  else
+                  {
+                    turn='yellow';
+                  }
+                }
+              }
+        }
+
+
+        else if(turn=='green')
+        {
+          if(red_position!=57)
+                {
+                  turn='red';
+                }
+                else{
+                  if(blue_position!=57)
+                  {
+                    turn='blue';
+                  }
+                  else
+                  {
+                    if(yellow_position!=57)
+                    {
+                       turn='yellow';
+                    }
+                    else 
+                    {
+                      turn='green';
+                    }
+                  }
+                }
+        }
+    }
+
+    if(turn=='red')
+    {
+      dice_color=Colors.red;
+    }
+    else if(turn=='blue')
+    {
+      dice_color=Colors.blue;
+    }
+    else if(turn=='green')
+    {
+      dice_color=Colors.green;
+    }
+    else if(turn=='yellow')
+    {
+      dice_color=Colors.yellow;
+    }
+    else 
+    {
+      dice_color=Colors.white;
+    }
+
+  }
+
+  void reset()
+  {
+    setState(() {
+      home='';
+      red_position=blue_position=green_position=yellow_position=58;
+      dice=7;
+      turn='red';
+      rolled='Nobody';
+    });
+  }
   void roll_dice()
   {
     setState(() {
@@ -25,8 +172,9 @@ class _mainpageState extends State<mainpage> {
       dice=random.nextInt(6)+1;
       
 
+      
+      if(turn=='red'){
 
-      if(turn=='RED'){
       if(red_position==58&&dice==6)
       {
         red_position=1;
@@ -41,20 +189,21 @@ class _mainpageState extends State<mainpage> {
       }
       else if(red_position==57)
       {
-        home="RED WINS";
+        home="red WINS";
       }
       rolled=turn;
       if(dice!=6)
       {
-         turn='BLUE';
+         next_turn();
       }
       }
 
 
 
 
-      else if(turn=='BLUE')
+      else if(turn=='blue')
       {
+
       if(blue_position==58&&dice==6)
       {
         blue_position=1;
@@ -69,24 +218,20 @@ class _mainpageState extends State<mainpage> {
       }
       else if(blue_position==57)
       {
-        home="BLUE WINS";
+        home="blue WINS";
       }
       rolled=turn;
       if(dice!=6)
       {
-         turn='YELLOW';
+         next_turn();
       }
       }
+      
 
 
 
-      else if(turn=='YELLOW')
+      else if(turn=='yellow')
       {
-      if(yellow_position==57)
-      {
-        return;
-      }
-      else{
         if(yellow_position==58&&dice==6)
       {
         yellow_position=1;
@@ -101,26 +246,21 @@ class _mainpageState extends State<mainpage> {
       }
       else if(yellow_position==57)
       {
-        home="YELLOW WINS";
+        home="yellow WINS";
       }
       rolled=turn;
       if(dice!=6)
       {
-         turn='GREEN';
+          next_turn();
       }
       }
-      }
+      
 
 
 
 
-      else if(turn=='GREEN')
+      else if(turn=='green')
       {
-      if(green_position==57)
-      {
-        return;
-      }
-      else{
         if(green_position==58&&dice==6)
       {
         green_position=1;
@@ -135,15 +275,15 @@ class _mainpageState extends State<mainpage> {
       }
       else if(green_position==57)
       {
-        home="GREEN WINS";
+        home="green WINS";
       }
       rolled=turn;
       if(dice!=6)
       {
-         turn='RED';
+         next_turn();
       }
       }
-      }
+      
     });
   }
   final List<Offset> path_blue=[
@@ -222,13 +362,16 @@ class _mainpageState extends State<mainpage> {
   ];
   @override
   Widget build(BuildContext context) {
+    var screensize=MediaQuery.of(context).size;
+    var blocksize= screensize.width/15;
+    //double padding = (blocksize*15);
     return MaterialApp(
       title: "test",
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        floatingActionButton: Container(height:80,width: 80,child: ElevatedButton(onPressed: roll_dice, child: Image.asset("images/$dice.jpg"))),
-          body: Padding(
-            padding: const EdgeInsets.all(50.0),
+        floatingActionButton:FloatingActionButton(onPressed: roll_dice,backgroundColor: dice_color,child: Image.asset("assets/images/$dice.jpg"),),
+        body: Padding(
+            padding: const EdgeInsets.only(top:100),
             child: Stack(
               children: [
                 //home text
@@ -238,16 +381,16 @@ class _mainpageState extends State<mainpage> {
                   child: Text(home)),
               //blue box
                 Positioned(
-                  left: 360,
-                  top: 0,
+                  left: blocksize*9,
+                  top: blocksize*0,
                   child:Container(
-                    height: 240,
-                    width: 240,
+                    height: blocksize*6,
+                    width: blocksize*6,
                     decoration: BoxDecoration(color: Colors.blue),
                     child: Center(
                       child: Container(
-                        height: 150,
-                        width: 150,
+                        height: blocksize*4,
+                        width: blocksize*4,
                         decoration: BoxDecoration(color: Colors.white),
                       ),
                     ),
@@ -255,16 +398,16 @@ class _mainpageState extends State<mainpage> {
                    ),
               //red box
                 Positioned(
-                  left: 0,
-                  top: 0,
+                  left: blocksize*0,
+                  top: blocksize*0,
                   child:Container(
-                    height: 240,
-                    width: 240,
+                    height: blocksize*6,
+                    width: blocksize*6,
                     decoration: BoxDecoration(color: Colors.red),
                     child: Center(
                       child: Container(
-                        height: 150,
-                        width: 150,
+                        height: blocksize*4,
+                        width: blocksize*4,
                         decoration: BoxDecoration(color: Colors.white),
                       ),
                     ),
@@ -272,16 +415,16 @@ class _mainpageState extends State<mainpage> {
                    ),
                //green box
                 Positioned(
-                  left: 0,
-                  top: 360,
+                  left: blocksize*0,
+                  top: blocksize*9,
                   child:Container(
-                    height: 240,
-                    width: 240,
+                    height: blocksize*6,
+                    width: blocksize*6,
                     decoration: BoxDecoration(color: Colors.green),
                     child: Center(
                       child: Container(
-                        height: 150,
-                        width: 150,
+                        height: blocksize*4,
+                        width: blocksize*4,
                         decoration: BoxDecoration(color: Colors.white),
                       ),
                     ),
@@ -289,51 +432,55 @@ class _mainpageState extends State<mainpage> {
                    ),
                 //yellow box
                 Positioned(
-                  left: 360,
-                  top: 360,
+                  left: blocksize*9,
+                  top: blocksize*9,
                   child:Container(
-                    height: 240,
-                    width: 240,
+                    height: blocksize*6,
+                    width: blocksize*6,
                     decoration: BoxDecoration(color: Colors.yellow),
                     child: Center(
                       child: Container(
-                        height: 150,
-                        width: 150,
+                        height: blocksize*4,
+                        width: blocksize*4,
                         decoration: BoxDecoration(color: Colors.white),
                       ),
                     ),
                   )
                    ),
             
-                Positioned(left: 245,top: 85,child: Icon(Icons.star,color: Colors.red,)) ,
-                Positioned(left: 85,top: 325,child: Icon(Icons.star,color: Colors.green)) ,
-                Positioned(left: 485,top: 245,child: Icon(Icons.star,color: Colors.blue)) ,
-                Positioned(left: 325,top: 485,child: Icon(Icons.star,color: Colors.yellow,)) ,
+                Positioned(left: blocksize*6,top: blocksize*2,child: Icon(Icons.star,color: Colors.red,)) ,
+                Positioned(left: blocksize*2,top: blocksize*7,child: Icon(Icons.star,color: Colors.green)) ,
+                Positioned(left: blocksize*12,top: blocksize*7,child: Icon(Icons.star,color: Colors.blue)) ,
+                Positioned(left: blocksize*8,top: blocksize*12,child: Icon(Icons.star,color: Colors.yellow,)) ,
+                Positioned(left: blocksize*2,top: blocksize*23,child: ElevatedButton(onPressed: reset, child: Text("RESET",style: TextStyle(fontSize: 30,backgroundColor: Colors.red,color: Colors.white),))),
+                Positioned(top: blocksize*20,left: blocksize*7,child: Text("$turn's turn",style: TextStyle(fontSize: 20),),),
+                Positioned(left: blocksize*8,top: blocksize*16,child: Text("$rolled rolled $dice",style: TextStyle(fontSize: 20),)),
+                Positioned(left: blocksize*1,top: blocksize*17,child: Text("$home ",style: TextStyle(fontSize: 20),)),
                 
 
               //blue run
               for (int i = 0; i < path_blue.length; i++)
               if(i==1)
                 Positioned(
-                    left: path_blue[i].dx * 40,
-                    top: path_blue[i].dy * 40,
+                    left: path_blue[i].dx * blocksize,
+                    top: path_blue[i].dy * blocksize,
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: blocksize,
+                      height: blocksize,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         color: Colors.blue
                       ),
-                      child: Positioned(left: 40,top: 240,child: Icon(Icons.star)) ,
+                      child: Icon(Icons.star) ,
                     ),
                   )
               else if(i>=52)
               Positioned(
-                left: path_blue[i].dx * 40,
-                top: path_blue[i].dy * 40,
+                left: path_blue[i].dx * blocksize,
+                top: path_blue[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     color: Colors.blue
@@ -342,55 +489,40 @@ class _mainpageState extends State<mainpage> {
               )
               else
               Positioned(
-                left: path_blue[i].dx * 40,
-                top: path_blue[i].dy * 40,
+                left: path_blue[i].dx * blocksize,
+                top: path_blue[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                   ),
                 ),
               ),
-
-              AnimatedPositioned(
-                left: path_blue[blue_position].dx*40,
-                top: path_blue[blue_position].dy*40, 
-                duration:Duration(milliseconds: 500),
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
-                    ),
-                ),
-                ),
-            
-            
+   
                 //red run
               for (int i = 0; i < path_red.length; i++)
               if(i==1)
                 Positioned(
-                    left: path_red[i].dx * 40,
-                    top: path_red[i].dy * 40,
+                    left: path_red[i].dx * blocksize,
+                    top: path_red[i].dy * blocksize,
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: blocksize,
+                      height: blocksize,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         color: Colors.red
                       ),
-                      child: Positioned(left: 40,top: 240,child: Icon(Icons.star)) ,
+                      child:Icon(Icons.star) ,
                     ),
                   )
               else if(i>=52)
               Positioned(
-                left: path_red[i].dx * 40,
-                top: path_red[i].dy * 40,
+                left: path_red[i].dx * blocksize,
+                top: path_red[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     color: Colors.red
@@ -399,50 +531,41 @@ class _mainpageState extends State<mainpage> {
               )
               else
               Positioned(
-                left: path_red[i].dx * 40,
-                top: path_red[i].dy * 40,
+                left: path_red[i].dx * blocksize,
+                top: path_red[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                   ),
                 ),
               ),
-              AnimatedPositioned(
-                left: path_red[red_position].dx*40,
-                top: path_red[red_position].dy*40, 
-                duration:Duration(milliseconds: 500),
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                ),
-                ),
+              
             
                  //green run 
               for (int i = 0; i < path_green.length; i++)
               if(i==1)
                 Positioned(
-                    left: path_green[i].dx * 40,
-                    top: path_green[i].dy * 40,
+                    left: path_green[i].dx * blocksize,
+                    top: path_green[i].dy * blocksize,
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: blocksize,
+                      height: blocksize,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         color: Colors.green
                       ),
-                      child: Positioned(left: 40,top: 240,child: Icon(Icons.star)) ,
+                      child: Icon(Icons.star) ,
                     ),
                   )
               else if(i>=52)
               Positioned(
-                left: path_green[i].dx * 40,
-                top: path_green[i].dy * 40,
+                left: path_green[i].dx * blocksize,
+                top: path_green[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     color: Colors.green
@@ -451,50 +574,41 @@ class _mainpageState extends State<mainpage> {
               )
               else
               Positioned(
-                left: path_green[i].dx * 40,
-                top: path_green[i].dy * 40,
+                left: path_green[i].dx * blocksize,
+                top: path_green[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                   ),
                 ),
               ),
-              AnimatedPositioned(
-                left: path_green[green_position].dx*40,
-                top: path_green[green_position].dy*40, 
-                duration:Duration(milliseconds: 500),
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.green,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                ),
-                ),
+              
             
                  //yellow run
               for (int i = 0; i < path_red.length; i++)
               if(i==1)
                 Positioned(
-                    left: path_yellow[i].dx * 40,
-                    top: path_yellow[i].dy * 40,
+                    left: path_yellow[i].dx * blocksize,
+                    top: path_yellow[i].dy * blocksize,
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: blocksize,
+                      height: blocksize,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         color: Colors.yellow
                       ),
-                      child: Positioned(left: 40,top: 240,child: Icon(Icons.star)) ,
+                      child: Icon(Icons.star) ,
                     ),
                   )
               else if(i>=52)
               Positioned(
-                left: path_yellow[i].dx * 40,
-                top: path_yellow[i].dy * 40,
+                left: path_yellow[i].dx * blocksize,
+                top: path_yellow[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     color: Colors.yellow
@@ -503,30 +617,64 @@ class _mainpageState extends State<mainpage> {
               )
               else
               Positioned(
-                left: path_yellow[i].dx * 40,
-                top: path_yellow[i].dy * 40,
+                left: path_yellow[i].dx * blocksize,
+                top: path_yellow[i].dy * blocksize,
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: blocksize,
+                  height: blocksize,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                   ),
                 ),
               ),
-              AnimatedPositioned(
-                left: path_yellow[yellow_position].dx*40,
-                top: path_yellow[yellow_position].dy*40, 
+              
+              Positioned(left: blocksize*6,top: blocksize*6,child: CustomPaint(size: Size(blocksize*3, blocksize*3),painter: DiagonalPartitionPainter(),),),
+
+                AnimatedPositioned(
+                left: path_blue[blue_position].dx*blocksize,
+                top: path_blue[blue_position].dy*blocksize, 
                 duration:Duration(milliseconds: 500),
                 child: Container(
-                  width: 30,
-                  height: 30,
+                  width: blocksize/1.25,
+                  height: blocksize/1.25,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
+                    ),
+                ),
+                ),
+                AnimatedPositioned(
+                left: path_red[red_position].dx*blocksize,
+                top: path_red[red_position].dy*blocksize, 
+                duration:Duration(milliseconds: 500),
+                child: Container(
+                  width: blocksize/1.25,
+                  height: blocksize/1.25,
+                  decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
+                ),
+                ),
+                AnimatedPositioned(
+                left: path_green[green_position].dx*blocksize,
+                top: path_green[green_position].dy*blocksize, 
+                duration:Duration(milliseconds: 500),
+                child: Container(
+                  width: blocksize/1.25,
+                  height: blocksize/1.25,
+                  decoration: BoxDecoration(color: Colors.green,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
+                ),
+                ),
+                AnimatedPositioned(
+                left: path_yellow[yellow_position].dx*blocksize,
+                top: path_yellow[yellow_position].dy*blocksize, 
+                duration:Duration(milliseconds: 500),
+                child: Container(
+                  width: blocksize/1.25,
+                  height: blocksize/1.25,
                   decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
                 ),
                 ),
-
-                Positioned(top: 400,left: 800,child: Text("$rolled rolled $dice\n\n$turn's TURN")),
-                Positioned(left: 240,top: 240,child: CustomPaint(size: Size(120, 120),painter: DiagonalPartitionPainter(),),),
-              ],
+            
+            ],
             ),
           ),
 
@@ -540,8 +688,8 @@ class DiagonalPartitionPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint1 = Paint()..color = Colors.red;
     Paint paint2 = Paint()..color = Colors.blue;
-    Paint paint3 = Paint()..color = Colors.green;
-    Paint paint4 = Paint()..color = Colors.yellow;
+    Paint paint3 = Paint()..color = Colors.yellow;
+    Paint paint4 = Paint()..color = Colors.green;
 
     Paint borderPaint = Paint()
       ..color = Colors.black
