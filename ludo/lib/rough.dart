@@ -3,16 +3,16 @@ import 'dart:math';
 
 void main()
 {
-  runApp(mainpage());
+  runApp(rough());
 }
-class mainpage extends StatefulWidget {
-  const mainpage({super.key});
+class rough extends StatefulWidget {
+  const rough({super.key});
 
   @override
-  State<mainpage> createState() => _mainpageState();
+  State<rough> createState() => _roughState();
 }
 
-class _mainpageState extends State<mainpage> {
+class _roughState extends State<rough> {
 
 
   Color dice_color=Colors.white;
