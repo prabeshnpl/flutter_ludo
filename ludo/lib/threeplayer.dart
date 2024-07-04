@@ -58,15 +58,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         red_1_position=1;
       }
-      else if(red_1_position>57)
+      else if((red_1_position==58&&dice!=6)||(red_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_1_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -91,15 +84,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         red_2_position=1;
       }
-      else if(red_2_position>57)
+      else if((red_2_position==59&&dice!=6)||(red_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_2_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -124,15 +110,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         red_3_position=1;
       }
-      else if(red_3_position>57)
+      else if((red_3_position==60&&dice!=6)||(red_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_3_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -142,7 +121,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       rolled=turn;
       if(dice!=6)
       {
-          next_turn();
+        next_turn();
       }
       dice_index=0;
       }
@@ -157,15 +136,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         red_4_position=1;
       }
-      else if(red_4_position>57)
+      else if((red_4_position==61&&dice!=6)||(red_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_4_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -192,15 +164,9 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         blue_1_position=1;
       }
-      else if(blue_1_position>57)
+      
+      else if(blue_1_position==58&&dice!=6||(blue_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_1_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -225,15 +191,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         blue_2_position=1;
       }
-      else if(blue_2_position>57)
+      else if(blue_2_position==59&&dice!=6||(blue_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_2_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -258,15 +217,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         blue_3_position=1;
       }
-      else if(blue_3_position>57)
+      else if(blue_3_position==60&&dice!=6||(blue_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_3_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -291,15 +243,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         blue_4_position=1;
       }
-      else if(blue_4_position>57)
+      else if(blue_4_position==61&&dice!=6||(blue_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_4_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -325,15 +270,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         yellow_1_position=1;
       }
-      else if(yellow_1_position>57)
+      else if((yellow_1_position==58&&dice!=6)||(yellow_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_1_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -358,15 +296,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         yellow_2_position=1;
       }
-      else if(yellow_2_position>57)
+      else if((yellow_2_position==59&&dice!=6)||(yellow_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_2_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -391,15 +322,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         yellow_3_position=1;
       }
-      else if(yellow_3_position>57)
+      else if((yellow_3_position==60&&dice!=6)||(yellow_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_3_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -424,15 +348,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       {
         yellow_4_position=1;
       }
-      else if(yellow_4_position>57)
+      else if((yellow_4_position==61&&dice!=6)||(yellow_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_4_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -448,7 +365,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       }
     });
   }
-
+ 
   void next_turn()
   {
     if(red_1_position==57&&yellow_1_position==57&&blue_1_position==57)
@@ -916,8 +833,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                 
                 Positioned(left: blocksize*6,top: blocksize*6,child: CustomPaint(size: Size(blocksize*3, blocksize*3),painter: DiagonalPartitionPainter(),),),
          
-         //blue
-                  AnimatedPositioned(
+         AnimatedPositioned(
                   left: path_blue[blue_1_position].dx*blocksize,
                   top: path_blue[blue_1_position].dy*blocksize, 
                   duration:Duration(milliseconds: 500),
@@ -928,7 +844,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _blue_1, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -942,7 +859,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_2, child: Text("")),
+                    child:Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _blue_2, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -956,7 +874,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _blue_3, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -970,7 +889,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_4, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _blue_4, child: Text(""))),
                   ),
                   ),
          
@@ -983,7 +903,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_1, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -994,7 +915,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_2, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_2, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1005,7 +927,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_3, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1016,7 +939,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_4, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_4, child: Text(""))),
                   ),
                   ),
          //yellow
@@ -1028,7 +952,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_1, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1039,7 +964,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_2, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_2, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1050,7 +976,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_3, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1061,7 +988,8 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_4, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_4, child: Text(""))),
                   ),
                   ),
               

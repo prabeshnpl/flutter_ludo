@@ -57,15 +57,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         red_1_position=1;
       }
-      else if(red_1_position>57)
+      else if((red_1_position==58&&dice!=6)||(red_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_1_position==57)
-      {
-        home="RED HOME";
-        next_turn();
         return;
       }
       else
@@ -90,15 +83,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         red_2_position=1;
       }
-      else if(red_2_position>57)
+      else if((red_2_position==59&&dice!=6)||(red_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_2_position==57)
-      {
-        home="RED HOME";
-        next_turn();
         return;
       }
       else
@@ -123,15 +109,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         red_3_position=1;
       }
-      else if(red_3_position>57)
+      else if((red_3_position==60&&dice!=6)||(red_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_3_position==57)
-      {
-        home="RED HOME";
-        next_turn();
         return;
       }
       else
@@ -141,7 +120,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       rolled=turn;
       if(dice!=6)
       {
-          next_turn();
+        next_turn();
       }
       dice_index=0;
       }
@@ -156,15 +135,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         red_4_position=1;
       }
-      else if(red_4_position>57)
+      else if((red_4_position==61&&dice!=6)||(red_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_4_position==57)
-      {
-        home="RED HOME";
-        next_turn();
         return;
       }
       else
@@ -181,6 +153,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
     });
   }
    
+
   void _yellow_1()
   {
     setState(() {
@@ -190,15 +163,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         yellow_1_position=1;
       }
-      else if(yellow_1_position>57)
+      else if((yellow_1_position==58&&dice!=6)||(yellow_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_1_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -223,15 +189,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         yellow_2_position=1;
       }
-      else if(yellow_2_position>57)
+      else if((yellow_2_position==59&&dice!=6)||(yellow_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_2_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -256,15 +215,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         yellow_3_position=1;
       }
-      else if(yellow_3_position>57)
+      else if((yellow_3_position==60&&dice!=6)||(yellow_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_3_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -289,15 +241,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       {
         yellow_4_position=1;
       }
-      else if(yellow_4_position>57)
+      else if((yellow_4_position==61&&dice!=6)||(yellow_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_4_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -313,7 +258,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       }
     });
   }
-
+ 
   void next_turn()
   {
     if(red_1_position==57&&yellow_1_position==57&&red_2_position==57&&red_3_position==57&&red_4_position==57&&yellow_2_position==57&&yellow_3_position==57&&yellow_4_position==57)
@@ -736,7 +681,6 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                 ),
                 
                 Positioned(left: blocksize*6,top: blocksize*6,child: CustomPaint(size: Size(blocksize*3, blocksize*3),painter: DiagonalPartitionPainter(),),),
-         
          //red
                   AnimatedPositioned(
                   left: path_red[red_1_position].dx*blocksize,
@@ -746,7 +690,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_1, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -757,7 +702,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_2, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_2, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -768,7 +714,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_3, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -779,11 +726,10 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_4, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _red_4, child: Text(""))),
                   ),
                   ),
-         
-         
          //yellow
                   AnimatedPositioned(
                   left: path_yellow[yellow_1_position].dx*blocksize,
@@ -793,7 +739,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_1, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -804,7 +751,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_2, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_2, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -815,7 +763,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_3, child: Text(""))),
                   ),
                   ),
                   AnimatedPositioned(
@@ -826,7 +775,8 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_4, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:TextButton(onPressed: _yellow_4, child: Text(""))),
                   ),
                   ),
               

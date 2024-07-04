@@ -59,15 +59,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         red_1_position=1;
       }
-      else if(red_1_position>57)
+      else if((red_1_position==58&&dice!=6)||(red_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_1_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -92,15 +85,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         red_2_position=1;
       }
-      else if(red_2_position>57)
+      else if((red_2_position==59&&dice!=6)||(red_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_2_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -125,15 +111,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         red_3_position=1;
       }
-      else if(red_3_position>57)
+      else if((red_3_position==60&&dice!=6)||(red_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_3_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -143,7 +122,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       rolled=turn;
       if(dice!=6)
       {
-          next_turn();
+        next_turn();
       }
       dice_index=0;
       }
@@ -158,15 +137,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         red_4_position=1;
       }
-      else if(red_4_position>57)
+      else if((red_4_position==61&&dice!=6)||(red_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(red_4_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -193,15 +165,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         blue_1_position=1;
       }
-      else if(blue_1_position>57)
+      
+      else if(blue_1_position==58&&dice!=6||(blue_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_1_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -226,15 +192,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         blue_2_position=1;
       }
-      else if(blue_2_position>57)
+      else if(blue_2_position==59&&dice!=6||(blue_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_2_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -259,15 +218,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         blue_3_position=1;
       }
-      else if(blue_3_position>57)
+      else if(blue_3_position==60&&dice!=6||(blue_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_3_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -292,15 +244,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         blue_4_position=1;
       }
-      else if(blue_4_position>57)
+      else if(blue_4_position==61&&dice!=6||(blue_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(blue_4_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -326,15 +271,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         yellow_1_position=1;
       }
-      else if(yellow_1_position>57)
+      else if((yellow_1_position==58&&dice!=6)||(yellow_1_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_1_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -359,15 +297,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         yellow_2_position=1;
       }
-      else if(yellow_2_position>57)
+      else if((yellow_2_position==59&&dice!=6)||(yellow_2_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_2_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -392,15 +323,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         yellow_3_position=1;
       }
-      else if(yellow_3_position>57)
+      else if((yellow_3_position==60&&dice!=6)||(yellow_3_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_3_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -425,15 +349,8 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         yellow_4_position=1;
       }
-      else if(yellow_4_position>57)
+      else if((yellow_4_position==61&&dice!=6)||(yellow_4_position+dice>57))
       {
-        next_turn();
-        return;
-      }
-      else if(yellow_4_position==57)
-      {
-        home="YELLOW HOME";
-        next_turn();
         return;
       }
       else
@@ -458,6 +375,10 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       if(green_1_position==58&&dice==6)
       {
         green_1_position=1;
+      }
+      else if(green_1_position==58&&dice!=6||(green_1_position+dice>57))
+      {
+        return;
       }
       else if(green_1_position>57)
       {
@@ -492,6 +413,10 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         green_2_position=1;
       }
+      else if(green_2_position==59&&dice!=6||(green_2_position+dice>57))
+      {
+        return;
+      }
       else if(green_2_position>57)
       {
         next_turn();
@@ -525,6 +450,10 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       {
         green_3_position=1;
       }
+      else if(green_3_position==60&&dice!=6||(green_3_position+dice>57))
+      {
+        return;
+      }
       else if(green_3_position>57)
       {
         next_turn();
@@ -557,6 +486,10 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       if(green_4_position==61&&dice==6)
       {
         green_4_position=1;
+      }
+      else if(green_4_position==61&&dice!=6||(green_4_position+dice>57))
+      {
+        return;
       }
       else if(green_4_position>57)
       {
@@ -854,7 +787,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       home: Scaffold(
         floatingActionButton:IconButton(onPressed: (){
           Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back,size: 50,)) ,
+        }, icon: Icon(Icons.arrow_back,size: 30,)) ,
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
        body: Container(
         decoration: BoxDecoration(color: Color.fromARGB(255, 117, 185, 240)),
@@ -1132,7 +1065,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _blue_1, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1146,7 +1081,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_2, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _blue_2, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1160,7 +1097,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _blue_3, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1174,7 +1113,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                       color: Colors.blue,
                       shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
                       ),
-                    child: TextButton(onPressed: _blue_4, child: Text("")),
+                   child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _blue_4, child: Text(""))),),
                   ),
                   ),
          
@@ -1187,7 +1128,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/3,width: blocksize/3,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _red_1, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1198,7 +1141,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_2, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/3,width: blocksize/3,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _red_2, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1209,7 +1154,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/3,width: blocksize/3,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _red_3, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1220,7 +1167,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _red_4, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/3,width: blocksize/3,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _red_4, child: Text(""))),),
                   ),
                   ),
          
@@ -1233,7 +1182,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.green,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _green_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/3,width: blocksize/3,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _green_1, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1244,8 +1195,10 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.green,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _green_2, child: Text("")),
-                  ),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _green_2, child: Text(""))),),
+                    ),
                   ),
                   AnimatedPositioned(
                   left: path_green[green_3_position].dx*blocksize,
@@ -1255,7 +1208,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.green,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _green_3, child: Text("")),
+                   child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _green_3, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1266,8 +1221,10 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.green,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _green_4, child: Text("")),
-                  ),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _green_4, child: Text(""))),),
+                    ),
                   ),
          
          //yellow
@@ -1279,7 +1236,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_1, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _yellow_1 ,child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1290,7 +1249,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_2, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _yellow_2, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1301,7 +1262,9 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_3, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _yellow_3, child: Text(""))),),
                   ),
                   ),
                   AnimatedPositioned(
@@ -1312,13 +1275,15 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: TextButton(onPressed: _yellow_4, child: Text("")),
+                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: _yellow_4, child: Text(""))),),
                   ),
                   ),
               
              Positioned(
                 left: blocksize*1,
-                top: blocksize*16,
+                top: blocksize*15,
                 child: Container(
                   height: blocksize*3,
                   width: blocksize*3,
@@ -1332,6 +1297,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                 },
               ),)
                 ),
+            
          
          
               ],
