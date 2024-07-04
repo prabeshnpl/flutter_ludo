@@ -44,134 +44,99 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
   var random=Random();
   var turn='red';
   var home='',rolled='Nobody';
-  int red_1_position=58,red_2_position=59,red_3_position=60,red_4_position=61;
-  int blue_1_position=58,blue_2_position=59,blue_3_position=60,blue_4_position=61;
-  int yellow_1_position=58,yellow_2_position=59,yellow_3_position=60,yellow_4_position=61;
+  List<int> red_position= List<int>.generate(4, (index) => index+58);
+  List<int> blue_position= List<int>.generate(4, (index) => index+58);
+  List<int> yellow_position= List<int>.generate(4, (index) => index+58);
   int dice=7,dice_index=0;
+    
+  int reset_position(int a)
+  {
+    if(a==0)
+    {return 58;}
+    else if(a==1)
+    {return 59;}
+    else if(a==2)
+    {return 60;}
+    else
+    {return 61;}
+}
 
-  void _red_1()
-  {
-    setState(() {
-        if(turn=='red'&&dice_index==1){
-          
-      if(red_1_position==58&&dice==6)
-      {
-        red_1_position=1;
-      }
-      else if((red_1_position==58&&dice!=6)||(red_1_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      red_1_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _red_2()
-  {
-    setState(() {
-        if(turn=='red'&&dice_index==1){
-          
-      if(red_2_position==59&&dice==6)
-      {
-        red_2_position=1;
-      }
-      else if((red_2_position==59&&dice!=6)||(red_2_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      red_2_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _red_3()
-  {
-    setState(() {
-        if(turn=='red'&&dice_index==1){
-          
-      if(red_3_position==60&&dice==6)
-      {
-        red_3_position=1;
-      }
-      else if((red_3_position==60&&dice!=6)||(red_3_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      red_3_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-        next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _red_4()
-  {
-    setState(() {
-        if(turn=='red'&&dice_index==1){
-          
-      if(red_4_position==61&&dice==6)
-      {
-        red_4_position=1;
-      }
-      else if((red_4_position==61&&dice!=6)||(red_4_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      red_4_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-   
+  void red_animation(int a)
+{
+  setState(() {
+    if(turn=='red'&&dice_index==1)
+    {
+      if(red_position[a]==reset_position(a)&&dice==6)  {red_position[a]=1; }
 
-  void _blue_1()
+      else if((red_position[a]==reset_position(a)&&dice!=6)||(red_position[a]+dice>57))  { return; }
+
+      else{   
+        red_position[a]+=dice; 
+        
+        if(red_position[a]!=1&&red_position[a]!=9&&red_position[a]!=14&&red_position[a]!=22&&red_position[a]!=27&&red_position[a]!=35&&red_position[a]!=40&&red_position[a]!=48)
+      {
+            for(int i=0;i<4;i++)
+            {
+              if((blue_position[i]<39&&(blue_position[i]+13==red_position[a]))||(blue_position[i]>40&&blue_position[i]<52&&blue_position[i]==(red_position[a]+39)))
+              {
+                blue_position[i]=reset_position(i);
+                dice_index=0;
+                return;
+              }
+              if((yellow_position[i]<25&&red_position[a]==yellow_position[i]+26)||(yellow_position[i]>27&&yellow_position[i]<52&&yellow_position[i]==red_position[a]+26))
+              {
+                yellow_position[i]=reset_position(i);
+                dice_index=0;
+                return;
+              }
+            }
+          }
+         }
+    }
+      rolled=turn;
+
+      if(dice!=6) {  next_turn();  }
+
+      dice_index=0;
+  });
+}
+
+  void blue_animation(int a)
   {
     setState(() {
       if(turn=='blue'&&dice_index==1){
           
-      if(blue_1_position==58&&dice==6)
+      if(blue_position[a]==reset_position(a)&&dice==6)
       {
-        blue_1_position=1;
+        blue_position[a]=1;
       }
       
-      else if(blue_1_position==58&&dice!=6||(blue_1_position+dice>57))
+      else if(blue_position[a]==reset_position(a)&&dice!=6||(blue_position[a]+dice>57))
       {
         return;
       }
       else
       {
-      blue_1_position+=dice;
+      blue_position[a]+=dice;
+      if(blue_position[a]!=1&&blue_position[a]!=9&&blue_position[a]!=14&&blue_position[a]!=22&&blue_position[a]!=27&&blue_position[a]!=35&&blue_position[a]!=40&&blue_position[a]!=48)
+      {
+        for(int i=0;i<4;i++)
+        {
+          if((yellow_position[i]<39&&(yellow_position[i]+13==blue_position[a]))||(yellow_position[i]>40&&yellow_position[i]<52&&yellow_position[i]==(blue_position[a]+39)))
+              {
+                yellow_position[i]=reset_position(i);
+                dice_index=0;
+                return;
+              }
+          if((red_position[i]>14&&red_position[i]<52&&red_position[i]==blue_position[a]+13)||(red_position[i]<13&&blue_position[a]==red_position[i]+39))
+              {
+                red_position[i]=reset_position(i);
+                dice_index=0;
+                return;
+              }
+        }
+      }
+      
       }
       rolled=turn;
       if(dice!=6)
@@ -182,74 +147,42 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       }
     });
   }
-  void _blue_2()
+  
+  void yellow_animation(int a)
   {
     setState(() {
-      if(turn=='blue'&&dice_index==1){
+      if(turn=='yellow'&&dice_index==1){
           
-      if(blue_2_position==59&&dice==6)
+      if(yellow_position[a]==reset_position(a)&&dice==6)
       {
-        blue_2_position=1;
+        yellow_position[a]=1;
       }
-      else if(blue_2_position==59&&dice!=6||(blue_2_position+dice>57))
+      else if((yellow_position[a]==reset_position(a)&&dice!=6)||(yellow_position[a]+dice>57))
       {
         return;
       }
       else
       {
-      blue_2_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _blue_3()
-  {
-    setState(() {
-     if(turn=='blue'&&dice_index==1){
-          
-      if(blue_3_position==60&&dice==6)
-      {
-        blue_3_position=1;
-      }
-      else if(blue_3_position==60&&dice!=6||(blue_3_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      blue_3_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _blue_4()
-  {
-    setState(() {
-      if(turn=='blue'&&dice_index==1){
-          
-      if(blue_4_position==61&&dice==6)
-      {
-        blue_4_position=1;
-      }
-      else if(blue_4_position==61&&dice!=6||(blue_4_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      blue_4_position+=dice;
+      yellow_position[a]+=dice;
+            if(yellow_position[a]!=1&&yellow_position[a]!=9&&yellow_position[a]!=14&&yellow_position[a]!=22&&yellow_position[a]!=27&&yellow_position[a]!=35&&yellow_position[a]!=40&&yellow_position[a]!=48)
+              {
+                 for(int i=0;i<4;i++)
+                 {
+                 if((red_position[i]<25&&yellow_position[a]==red_position[i]+26)||(red_position[i]>27&&red_position[i]<52&&red_position[i]==yellow_position[a]+26))
+              {
+                red_position[i]=reset_position(i);
+                dice_index=0;
+                return;
+              }
+                 if((blue_position[i]>14&&blue_position[i]<52&&blue_position[i]==yellow_position[a]+13)||(blue_position[i]<13&&yellow_position[a]==blue_position[i]+39))
+              {
+                blue_position[i]=reset_position(i);
+                dice_index=0;
+                return;
+              }
+
+                 }
+              }
       }
       rolled=turn;
       if(dice!=6)
@@ -261,155 +194,42 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
     });
   }
 
-  void _yellow_1()
-  {
-    setState(() {
-      if(turn=='yellow'&&dice_index==1){
-          
-      if(yellow_1_position==58&&dice==6)
-      {
-        yellow_1_position=1;
-      }
-      else if((yellow_1_position==58&&dice!=6)||(yellow_1_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      yellow_1_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _yellow_2()
-  {
-    setState(() {
-      if(turn=='yellow'&&dice_index==1){
-          
-      if(yellow_2_position==59&&dice==6)
-      {
-        yellow_2_position=1;
-      }
-      else if((yellow_2_position==59&&dice!=6)||(yellow_2_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      yellow_2_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _yellow_3()
-  {
-    setState(() {
-      if(turn=='yellow'&&dice_index==1){
-          
-      if(yellow_3_position==60&&dice==6)
-      {
-        yellow_3_position=1;
-      }
-      else if((yellow_3_position==60&&dice!=6)||(yellow_3_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      yellow_3_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
-  void _yellow_4()
-  {
-    setState(() {
-      if(turn=='yellow'&&dice_index==1){
-          
-      if(yellow_4_position==61&&dice==6)
-      {
-        yellow_4_position=1;
-      }
-      else if((yellow_4_position==61&&dice!=6)||(yellow_4_position+dice>57))
-      {
-        return;
-      }
-      else
-      {
-      yellow_4_position+=dice;
-      }
-      rolled=turn;
-      if(dice!=6)
-      {
-          next_turn();
-      }
-      dice_index=0;
-      }
-    });
-  }
  
   void next_turn()
   {
-    if(red_1_position==57&&yellow_1_position==57&&blue_1_position==57)
-    {
-      if(blue_2_position==57&&yellow_2_position==57&&red_2_position==57)
-        {
-          if(red_3_position==57&&blue_3_position==57&&yellow_3_position==57)
-              {
-                if(yellow_4_position==57&&red_4_position==57&&blue_4_position==57)
-                  {turn='white';}
-                }
-          }
-    }
+    if((blue_position[0]==57&&blue_position[1]==57&&blue_position[2]==57&&blue_position[3]==57)||(red_position[0]==57&&red_position[1]==57&&red_position[2]==57&&red_position[3]==57)||(yellow_position[0]==57&&yellow_position[1]==57&&yellow_position[2]==57&&yellow_position[3]==57))
+    {turn='white';}
     else
     {
       if(turn=='red')
       {
-          if(blue_1_position!=57||blue_2_position!=57||blue_3_position!=57||blue_4_position!=57)
+          if(blue_position[0]!=57||blue_position[1]!=57||blue_position[2]!=57||blue_position[3]!=57)
           {
             turn='blue';
           }
           else 
           {
-            if(yellow_1_position!=57||yellow_2_position!=57||yellow_4_position!=57||yellow_3_position!=57)
+            if(yellow_position[0]!=57||yellow_position[1]!=57||yellow_position[3]!=57||yellow_position[2]!=57)
             {
               turn ='yellow';
             }
-              else{
+            else
+            {
                 turn='red';
-              }
-            
+            }
           }
         }
 
 
         else if(turn=='blue')
         {
-          if(yellow_1_position!=57||yellow_2_position!=57||yellow_4_position!=57||yellow_3_position!=57)
+          if(yellow_position[0]!=57||yellow_position[1]!=57||yellow_position[3]!=57||yellow_position[2]!=57)
             {
               turn ='yellow';
             }
             else
             {
-                if(red_1_position!=57||red_2_position!=57||red_3_position!=57||red_4_position!=57)
+                if(red_position[0]!=57||red_position[1]!=57||red_position[2]!=57||red_position[3]!=57)
                 {
                   turn='red';
                 }
@@ -422,12 +242,12 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
 
         else if(turn=='yellow')
         {
-                if(red_1_position!=57||red_2_position!=57||red_3_position!=57||red_4_position!=57)
+                if(red_position[0]!=57||red_position[1]!=57||red_position[2]!=57||red_position[3]!=57)
                 {
                   turn='red';
                 }
                 else{
-                  if(blue_1_position!=57||blue_2_position!=57||blue_3_position!=57||blue_4_position!=57)
+                  if(blue_position[0]!=57||blue_position[1]!=57||blue_position[2]!=57||blue_position[3]!=57)
                   {
                     turn='blue';
                   }
@@ -435,21 +255,19 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                   {
                     turn='yellow';
                   }
-                }
-              
+              }
         }
     }
-
   }
 
   void reset()
   {
     setState(() {
       home='';
-      red_1_position=blue_1_position=yellow_1_position=58;
-      red_2_position=blue_2_position=yellow_2_position=59;
-      red_3_position=blue_3_position=yellow_3_position=60;
-      red_4_position=blue_4_position=yellow_4_position=61;
+      red_position[0]=blue_position[0]=yellow_position[0]=58;
+      red_position[1]=blue_position[1]=yellow_position[1]=59;
+      red_position[2]=blue_position[2]=yellow_position[2]=60;
+      red_position[3]=blue_position[3]=yellow_position[3]=61;
       dice=7;
       turn='red';
       rolled='Nobody';
@@ -465,15 +283,15 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
         rolled=turn;
         dice=random.nextInt(6)+1;
          _controller.forward();
-        if(turn=='blue'&&blue_1_position==58&&blue_2_position==59&&blue_3_position==60&&blue_4_position==61&&dice!=6)
+        if(turn=='blue'&&blue_position[0]==58&&blue_position[1]==59&&blue_position[2]==60&&blue_position[3]==61&&dice!=6)
       {
         next_turn();
       }
-      else if(turn=='red'&&red_1_position==58&&red_2_position==59&&red_3_position==60&&red_4_position==61&&dice!=6)
+      else if(turn=='red'&&red_position[0]==58&&red_position[1]==59&&red_position[2]==60&&red_position[3]==61&&dice!=6)
       {
         next_turn();
       }
-      else if(turn=='yellow'&&yellow_1_position==58&&yellow_2_position==59&&yellow_3_position==60&&yellow_4_position==61&&dice!=6)
+      else if(turn=='yellow'&&yellow_position[0]==58&&yellow_position[1]==59&&yellow_position[2]==60&&yellow_position[3]==61&&dice!=6)
       {
         next_turn();
       }
@@ -567,7 +385,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
       home: Scaffold(
         floatingActionButton:IconButton(onPressed: (){
           Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back,size: 50,)) ,
+        }, icon: Icon(Icons.arrow_back,size: 30,)) ,
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
        body: Container(
         decoration: BoxDecoration(color: Color.fromARGB(255, 117, 185, 240)),
@@ -649,35 +467,11 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     )
                      ),
               
-                  Positioned(left: blocksize*6,top: blocksize*2,child: Icon(Icons.star,color: Colors.red,)) ,
-                  Positioned(left: blocksize*2,top: blocksize*7,child: Icon(Icons.star,color: Colors.green)) ,
-                  Positioned(left: blocksize*11,top: blocksize*6,child: Icon(Icons.star,color: Colors.blue)) ,
-                  Positioned(left: blocksize*8,top: blocksize*12,child: Icon(Icons.star,color: Color.fromARGB(255, 194, 181, 60),)) ,
-              
-                  Positioned(left: blocksize*4,top: blocksize*20,child: ElevatedButton(onPressed: reset, child: Text("RESET",style: TextStyle(fontSize: 20,backgroundColor: Colors.red,color: Colors.white),))),
-         
-                  Positioned(top: blocksize*18,left: blocksize*8,child: Text("$turn's turn",style: TextStyle(fontSize: 20),),),
-                  Positioned(left: blocksize*8,top: blocksize*16,child: Text("$rolled rolled $dice",style: TextStyle(fontSize: 20),)),
-                  Positioned(left: blocksize*1,top: blocksize*17,child: Text("$home ",style: TextStyle(fontSize: 20),)),
                   
          
                 //blue run
                 for (int i = 0; i < path_blue.length; i++)
-                if(i==1)
-                  Positioned(
-                      left: path_blue[i].dx * blocksize,
-                      top: path_blue[i].dy * blocksize,
-                      child: Container(
-                        width: blocksize,
-                        height: blocksize,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          color: Colors.blue
-                        ),
-                        child: Icon(Icons.star) ,
-                      ),
-                    )
-                else if(i>=52)
+                if(i>=52)
                 Positioned(
                   left: path_blue[i].dx * blocksize,
                   top: path_blue[i].dy * blocksize,
@@ -699,27 +493,14 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     height: blocksize,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
+                      color: Colors.white
                     ),
                   ),
                 ),
             
                   //red run
                 for (int i = 0; i < path_red.length; i++)
-                if(i==1)
-                  Positioned(
-                      left: path_red[i].dx * blocksize,
-                      top: path_red[i].dy * blocksize,
-                      child: Container(
-                        width: blocksize,
-                        height: blocksize,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          color: Colors.red
-                        ),
-                        child:Icon(Icons.star) ,
-                      ),
-                    )
-                else if(i>=52)
+                if(i>=52)
                 Positioned(
                   left: path_red[i].dx * blocksize,
                   top: path_red[i].dy * blocksize,
@@ -741,6 +522,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     height: blocksize,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
+                      color: Colors.white
                     ),
                   ),
                 ),
@@ -748,21 +530,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
               
                    //green run 
                 for (int i = 0; i < path_green.length; i++)
-                if(i==1)
-                  Positioned(
-                      left: path_green[i].dx * blocksize,
-                      top: path_green[i].dy * blocksize,
-                      child: Container(
-                        width: blocksize,
-                        height: blocksize,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          color: Colors.green
-                        ),
-                        child: Icon(Icons.star) ,
-                      ),
-                    )
-                else if(i>=52)
+                if(i>=52)
                 Positioned(
                   left: path_green[i].dx * blocksize,
                   top: path_green[i].dy * blocksize,
@@ -784,6 +552,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     height: blocksize,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
+                      color: Colors.white
                     ),
                   ),
                 ),
@@ -791,21 +560,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
               
                    //yellow run
                 for (int i = 0; i < path_red.length; i++)
-                if(i==1)
-                  Positioned(
-                      left: path_yellow[i].dx * blocksize,
-                      top: path_yellow[i].dy * blocksize,
-                      child: Container(
-                        width: blocksize,
-                        height: blocksize,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          color: Colors.yellow
-                        ),
-                        child: Icon(Icons.star) ,
-                      ),
-                    )
-                else if(i>=52)
+                if(i>=52)
                 Positioned(
                   left: path_yellow[i].dx * blocksize,
                   top: path_yellow[i].dy * blocksize,
@@ -827,175 +582,131 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                     height: blocksize,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
+                      color: Colors.white
                     ),
                   ),
                 ),
                 
+
+                Positioned(left: blocksize*6,top: blocksize*2,child: Icon(Icons.star,color: Colors.red,)) ,
+                Positioned(left: blocksize*2,top: blocksize*8,child: Icon(Icons.star,color: Colors.green)) ,
+                Positioned(left: blocksize*12,top: blocksize*6,child: Icon(Icons.star,color: Colors.blue)) ,
+                Positioned(left: blocksize*8,top: blocksize*12,child: Icon(Icons.star,color: Color.fromARGB(255, 194, 181, 60),)) ,
+            
+                Positioned(left: blocksize*4,top: blocksize*20,child: ElevatedButton(onPressed: reset, child: Text("RESET",style: TextStyle(fontSize: 20,backgroundColor: Colors.red,color: Colors.white),))),
+        
+                Positioned(top: blocksize*18,left: blocksize*8,child: Text("$turn's turn",style: TextStyle(fontSize: 20),),),
+                Positioned(left: blocksize*8,top: blocksize*16,child: Text("$rolled rolled $dice",style: TextStyle(fontSize: 20),)),
+                Positioned(left: blocksize*1,top: blocksize*17,child: Text("$home ",style: TextStyle(fontSize: 20),)),
+                
                 Positioned(left: blocksize*6,top: blocksize*6,child: CustomPaint(size: Size(blocksize*3, blocksize*3),painter: DiagonalPartitionPainter(),),),
-         
-         AnimatedPositioned(
-                  left: path_blue[blue_1_position].dx*blocksize,
-                  top: path_blue[blue_1_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
+
+                Positioned(
+                      left: path_blue[1].dx * blocksize,
+                      top: path_blue[1].dy * blocksize,
+                      child: Container(
+                        width: blocksize,
+                        height: blocksize,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          color: Colors.blue
+                        ),
+                        child: Icon(Icons.star) ,
                       ),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _blue_1, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_blue[blue_2_position].dx*blocksize,
-                  top: path_blue[blue_2_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
+                    ),
+                Positioned(
+                      left: path_red[1].dx * blocksize,
+                      top: path_red[1].dy * blocksize,
+                      child: Container(
+                        width: blocksize,
+                        height: blocksize,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          color: Colors.red
+                        ),
+                        child:Icon(Icons.star) ,
                       ),
-                    child:Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _blue_2, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_blue[blue_3_position].dx*blocksize,
-                  top: path_blue[blue_3_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
+                    ),
+                Positioned(
+                      left: path_green[1].dx * blocksize,
+                      top: path_green[1].dy * blocksize,
+                      child: Container(
+                        width: blocksize,
+                        height: blocksize,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          color: Colors.green
+                        ),
+                        child: Icon(Icons.star) ,
                       ),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _blue_3, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_blue[blue_4_position].dx*blocksize,
-                  top: path_blue[blue_4_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
+                    ),
+                Positioned(
+                      left: path_yellow[1].dx * blocksize,
+                      top: path_yellow[1].dy * blocksize,
+                      child: Container(
+                        width: blocksize,
+                        height: blocksize,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          color: Colors.yellow
+                        ),
+                        child: Icon(Icons.star) ,
                       ),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _blue_4, child: Text(""))),
-                  ),
-                  ),
-         
+                    ),
+
          //red
-                  AnimatedPositioned(
-                  left: path_red[red_1_position].dx*blocksize,
-                  top: path_red[red_1_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _red_1, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_red[red_2_position].dx*blocksize,
-                  top: path_red[red_2_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _red_2, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_red[red_3_position].dx*blocksize,
-                  top: path_red[red_3_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _red_3, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_red[red_4_position].dx*blocksize,
-                  top: path_red[red_4_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _red_4, child: Text(""))),
-                  ),
-                  ),
+                  for(int i=0;i<4;i++)
+                     AnimatedPositioned(
+                        left: path_red[red_position[i]].dx*blocksize,
+                        top: path_red[red_position[i]].dy*blocksize, 
+                        duration:Duration(milliseconds: 500),
+                        child: Container(
+                          width: blocksize/1.25,
+                          height: blocksize/1.25,
+                          decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
+                          child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                          child:Container(height: blocksize/3,width: blocksize/3,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                          child:TextButton(onPressed: (){red_animation(i);}, child: Text(""))),),
+                        ),
+                        ),
+          //blue
+                  for(int i=0;i<4;i++)
+                      AnimatedPositioned(
+                        left: path_blue[blue_position[i]].dx*blocksize,
+                        top: path_blue[blue_position[i]].dy*blocksize, 
+                        duration:Duration(milliseconds: 500),
+                        child: Container(
+                          width: blocksize/1.25,
+                          height: blocksize/1.25,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)
+                            ),
+                          child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
+                          child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                          child:TextButton(onPressed: (){blue_animation(i);}, child: Text(""))),),
+                        ),
+                        ),
+                        
          //yellow
+                  for(int i=0;i<4;i++)
                   AnimatedPositioned(
-                  left: path_yellow[yellow_1_position].dx*blocksize,
-                  top: path_yellow[yellow_1_position].dy*blocksize, 
+                  left: path_yellow[yellow_position[i]].dx*blocksize,
+                  top: path_yellow[yellow_position[i]].dy*blocksize, 
                   duration:Duration(milliseconds: 500),
                   child: Container(
                     width: blocksize/1.25,
                     height: blocksize/1.25,
                     decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
                     child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _yellow_1, child: Text(""))),
+                    child:Container(height: blocksize/2,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 1.5)),
+                    child:TextButton(onPressed: (){yellow_animation(i);},child: Text(""))),),
                   ),
                   ),
-                  AnimatedPositioned(
-                  left: path_yellow[yellow_2_position].dx*blocksize,
-                  top: path_yellow[yellow_2_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _yellow_2, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_yellow[yellow_3_position].dx*blocksize,
-                  top: path_yellow[yellow_3_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _yellow_3, child: Text(""))),
-                  ),
-                  ),
-                  AnimatedPositioned(
-                  left: path_yellow[yellow_4_position].dx*blocksize,
-                  top: path_yellow[yellow_4_position].dy*blocksize, 
-                  duration:Duration(milliseconds: 500),
-                  child: Container(
-                    width: blocksize/1.25,
-                    height: blocksize/1.25,
-                    decoration: BoxDecoration(color: Colors.yellow,shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 3)),
-                    child: Container(height: blocksize/1.5,width: blocksize/1.5,decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: Colors.black,width: 2)),
-                    child:TextButton(onPressed: _yellow_4, child: Text(""))),
-                  ),
-                  ),
-              
+                 
              Positioned(
                 left: blocksize*1,
-                top: blocksize*16,
+                top: blocksize*15,
                 child: Container(
                   height: blocksize*3,
                   width: blocksize*3,
@@ -1009,6 +720,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                 },
               ),)
                 ),
+            
          
          
               ],

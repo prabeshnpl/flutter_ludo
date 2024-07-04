@@ -55,28 +55,28 @@ class _homepageState extends State<homepage> {
             children: [
               Positioned(
                 top: _height/2,
-                left: _width/2.3,
+                left: _width/2.5,
                 child: Container(
                   height: 300,
                   width: 300,
                   child: Image.asset('assets/images/logo.png'))),
               Positioned(
                 top: _height*4,
-                left: _width*1.2,
+                left: _width*1.1,
                 child:ElevatedButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>twoplayer()));
                   }, child: Text("TWO PLAYER",style: TextStyle(fontSize: 20),) ),
                ),
               Positioned(
                 top: _height*4.8,
-                left: _width*1.1,
+                left: _width,
                 child:ElevatedButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>threeplayer()));
                 }, child: Text("THREE PLAYER",style: TextStyle(fontSize: 20)) ),
                ),
               Positioned(
                 top: _height*5.6,
-                left: _width*1.2,
+                left: _width*1.1,
                 child:ElevatedButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>fourplayer()));
                 }, child: Text("FOUR PLAYER",style: TextStyle(fontSize: 20)) ),
