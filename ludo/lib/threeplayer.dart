@@ -47,7 +47,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
   List<int> red_position= List<int>.generate(4, (index) => index+58);
   List<int> blue_position= List<int>.generate(4, (index) => index+58);
   List<int> yellow_position= List<int>.generate(4, (index) => index+58);
-  int dice=7,dice_index=0;
+  int dice=7,dice_index=0,six_counter=0;
     
   int reset_position(int a)
   {
@@ -197,6 +197,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
  
   void next_turn()
   {
+    six_counter=0;
     if((blue_position[0]==57&&blue_position[1]==57&&blue_position[2]==57&&blue_position[3]==57)||(red_position[0]==57&&red_position[1]==57&&red_position[2]==57&&red_position[3]==57)||(yellow_position[0]==57&&yellow_position[1]==57&&yellow_position[2]==57&&yellow_position[3]==57))
     {turn='white';}
     else
@@ -283,7 +284,15 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
         rolled=turn;
         dice=random.nextInt(6)+1;
          _controller.forward();
-        if(turn=='blue'&&blue_position[0]==58&&blue_position[1]==59&&blue_position[2]==60&&blue_position[3]==61&&dice!=6)
+         if(dice==6)
+         {
+          six_counter++;
+         }
+         if(six_counter==3)
+         {
+          next_turn();
+         }
+       else if(turn=='blue'&&blue_position[0]==58&&blue_position[1]==59&&blue_position[2]==60&&blue_position[3]==61&&dice!=6)
       {
         next_turn();
       }
@@ -687,7 +696,7 @@ class _threeplayerState extends State<threeplayer> with SingleTickerProviderStat
                           child:TextButton(onPressed: (){blue_animation(i);}, child: Text(""))),),
                         ),
                         ),
-                        
+
          //yellow
                   for(int i=0;i<4;i++)
                   AnimatedPositioned(

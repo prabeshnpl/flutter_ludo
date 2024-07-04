@@ -1,6 +1,0 @@
-if((yellow_position[i]>14&&yellow_position[i]<52&&yellow_position[i]==green_position[a]+13)||(yellow_position[i]<13&&green_position[a]==yellow_position[i]+39))
-              {
-                yellow_position[i]=reset_position(i);
-                dice_index=0;
-                return;
-              }

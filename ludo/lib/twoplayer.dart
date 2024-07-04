@@ -46,7 +46,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
   var home='',rolled='Nobody';
   List<int> red_position= List<int>.generate(4, (index) => index+58);
   List<int> yellow_position= List<int>.generate(4, (index) => index+58);
-  int dice=7,dice_index=0;
+  int dice=7,dice_index=0,six_counter=0;
     
   int reset_position(int a)
   {
@@ -133,7 +133,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
     });
   }
   void next_turn()
-  {
+  { six_counter=0;
     if((red_position[0]==57&&red_position[1]==57&&red_position[2]==57&&red_position[3]==57)||(yellow_position[0]==57&&yellow_position[1]==57&&yellow_position[2]==57&&yellow_position[3]==57))
     {turn='white';}
     else
@@ -208,7 +208,15 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
         rolled=turn;
         dice=random.nextInt(6)+1;
          _controller.forward();
-       if(turn=='red'&&red_position[0]==58&&red_position[1]==59&&red_position[2]==60&&red_position[3]==61&&dice!=6)
+         if(dice==6)
+         {
+          six_counter++;
+         }
+      if(six_counter==3)
+      {
+        next_turn();
+      }
+      else if(turn=='red'&&red_position[0]==58&&red_position[1]==59&&red_position[2]==60&&red_position[3]==61&&dice!=6)
       {
         next_turn();
       }

@@ -425,7 +425,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
        {
          next_turn();
        }
-       else if(turn=='blue'&&blue_position[0]==58&&blue_position[1]==59&&blue_position[2]==60&&blue_position[3]==61&&dice!=6)
+      else if(turn=='blue'&&blue_position[0]==58&&blue_position[1]==59&&blue_position[2]==60&&blue_position[3]==61&&dice!=6)
       {
         next_turn();
       }
