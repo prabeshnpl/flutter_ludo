@@ -39,8 +39,9 @@ class _homepageState extends State<homepage> {
   @override
   Widget build(BuildContext context) {
     var screensize=MediaQuery.of(context).size;
-    var _height=screensize.height/8;
-    var _width=screensize.width/4;
+    var height=screensize.height/8;
+    var _width=screensize.width;
+    var width=screensize.width/4;
     return Scaffold(
       body:
       Container(
@@ -54,31 +55,31 @@ class _homepageState extends State<homepage> {
           child: Stack(
             children: [
               Positioned(
-                top: _height/2,
-                left: _width/2.5,
+                top: height/2,
+                left:width/2.5,
                 child: Container(
                   height: 300,
                   width: 300,
                   child: Image.asset('assets/images/logo.png'))),
               Positioned(
-                top: _height*4,
-                left: _width*1.1,
+                top: height*4,
+                left: width*1.1,
                 child:ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>twoplayer()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>twoplayer(Screensize:_width)));
                   }, child: Text("TWO PLAYER",style: TextStyle(fontSize: 20),) ),
                ),
               Positioned(
-                top: _height*4.8,
-                left: _width,
+                top: height*4.8,
+                left: width,
                 child:ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>threeplayer()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>threeplayer(Screensize:_width)));
                 }, child: Text("THREE PLAYER",style: TextStyle(fontSize: 20)) ),
                ),
               Positioned(
-                top: _height*5.6,
-                left: _width*1.1,
+                top: height*5.6,
+                left: width*1.1,
                 child:ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>fourplayer()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>fourplayer(Screensize:_width)));
                 }, child: Text("FOUR PLAYER",style: TextStyle(fontSize: 20)) ),
                ),
             ],
