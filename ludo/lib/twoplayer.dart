@@ -52,10 +52,10 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
   List<int> yellow_position= List<int>.generate(4, (index) => index+58);
   int dice_index=0,dice=7,six_counter=0;
     
-    List<double> redblockleft=List<double>.filled(4,1);
-    List<double> redblocktop=List<double>.filled(4, 1);
-    List<double> yellowblockleft=List<double>.filled(4, 1);
-    List<double> yellowblocktop=List<double>.filled(4, 1);
+    List<double> redblockleft=List<double>.filled(4,-2);
+    List<double> redblocktop=List<double>.filled(4, -8);
+    List<double> yellowblockleft=List<double>.filled(4, -2);
+    List<double> yellowblocktop=List<double>.filled(4, -8);
     final List<Offset> path_red=[
                      Offset(0, 6),Offset(1, 6),Offset(2, 6),Offset(3, 6),Offset(4, 6),Offset(5, 6),
                      Offset(6, 5),Offset(6, 4),Offset(6, 3),Offset(6, 2),Offset(6, 1),Offset(6, 0),
@@ -188,7 +188,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
       }
        else if(red_position[a]!=1&&red_position[a]!=9&&red_position[a]!=14&&red_position[a]!=22&&red_position[a]!=27&&red_position[a]!=35&&red_position[a]!=40&&red_position[a]!=48)
       {
-        redblockleft[a]=1;
+        redblockleft[a]=-2;
         int cc=0;
             for(int i=0;i<4;i++)
             {
@@ -308,11 +308,11 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
          next_turn();
          dice_index=0;
        }
-      else if(turn=='red'&&red_position[0]==58&&red_position[1]==59&&red_position[2]==60&&red_position[3]==61&&dice!=6)
+      else if(turn=='red'&&(red_position[0]==58||red_position[0]==57||red_position[0]+dice>57)&&((red_position[1]==59||red_position[1]==57||red_position[1]+dice>57)&&(red_position[2]==60||red_position[2]==57||red_position[2]+dice>57)&&(red_position[3]==61||red_position[3]==57||red_position[3]+dice>57)&&dice!=6))
       {
         next_turn();
       }
-      else if(turn=='yellow'&&yellow_position[0]==58&&yellow_position[1]==59&&yellow_position[2]==60&&yellow_position[3]==61&&dice!=6)
+      else if(turn=='yellow'&&(yellow_position[0]==58||yellow_position[0]==57||yellow_position[0]+dice>57)&&((yellow_position[1]==59||yellow_position[1]==57||yellow_position[1]+dice>57)&&(yellow_position[2]==60||yellow_position[2]==57||yellow_position[2]+dice>57)&&(yellow_position[3]==61||yellow_position[3]==57||yellow_position[3]+dice>57)&&dice!=6))
       {
         next_turn();
       }
@@ -379,7 +379,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                                           onTap: turn=='red'&&dice_index==1 ? (){red_animation(i);} : null,
                                           splashColor: turn=='red'&&dice_index==1 ? Theme.of(context).primaryColor.withOpacity(0.3) : Colors.transparent,
                                           highlightColor: turn=='red'&&dice_index==1 ? Theme.of(context).primaryColor.withOpacity(0.1) : Colors.transparent,
-                                          child:LudoPawn(size: blocksize, color: Colors.red)
+                                          child:LudoPawn(size: blocksize*1.2, color: Colors.red)
                                           )
                            ),
                            
@@ -394,7 +394,7 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
                                     onTap: turn=='yellow'&&dice_index==1 ? (){yellow_animation(i);} : null,
                                     splashColor: turn=='yellow'&&dice_index==1 ? Theme.of(context).primaryColor.withOpacity(0.3) : Colors.transparent,
                                     highlightColor: turn=='yellow'&&dice_index==1 ? Theme.of(context).primaryColor.withOpacity(0.1) : Colors.transparent,
-                                    child:LudoPawn(size: blocksize, color: Colors.yellow)
+                                    child:LudoPawn(size: blocksize*1.2, color: Colors.yellow)
                                     )   ),     
                  ],
                  ),
@@ -424,11 +424,6 @@ class _twoplayerState extends State<twoplayer> with SingleTickerProviderStateMix
             ),
           ),
          
-          Row(
-          children: [
-           // IconButton(onPressed: reset, icon: Icon(Icons.remove,size: 100,))
-          ],
-              )
          ],
        ),
 

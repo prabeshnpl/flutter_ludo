@@ -52,14 +52,14 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
   List<int> green_position= List<int>.generate(4, (index) => index+58);
   List<int> yellow_position= List<int>.generate(4, (index) => index+58);
 
-   List<double> redblockleft=List<double>.filled(4,1);
-    List<double> redblocktop=List<double>.filled(4, 0);
-    List<double> yellowblockleft=List<double>.filled(4, 1);
-    List<double> yellowblocktop=List<double>.filled(4, 0);
-   List<double> blueblockleft=List<double>.filled(4,1);
-    List<double> blueblocktop=List<double>.filled(4, 0);
-    List<double> greenblockleft=List<double>.filled(4, 1);
-    List<double> greenblocktop=List<double>.filled(4, 0);
+   List<double> redblockleft=List<double>.filled(4,-2);
+    List<double> redblocktop=List<double>.filled(4, -8);
+    List<double> yellowblockleft=List<double>.filled(4, -2);
+    List<double> yellowblocktop=List<double>.filled(4, -8);
+   List<double> blueblockleft=List<double>.filled(4,-2);
+    List<double> blueblocktop=List<double>.filled(4, -8);
+    List<double> greenblockleft=List<double>.filled(4, -2);
+    List<double> greenblocktop=List<double>.filled(4, -8);
 
   int dice_index=0,dice=7,six_counter=0;
 
@@ -198,7 +198,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
         }
        else if(red_position[a]!=1&&red_position[a]!=9&&red_position[a]!=14&&red_position[a]!=22&&red_position[a]!=27&&red_position[a]!=35&&red_position[a]!=40&&red_position[a]!=48)
       {
-        redblockleft[a]=1;
+        redblockleft[a]=-2;
         int cc=0;
             for(int i=0;i<4;i++)
             {
@@ -346,7 +346,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       }
             else if(yellow_position[a]!=1&&yellow_position[a]!=9&&yellow_position[a]!=14&&yellow_position[a]!=22&&yellow_position[a]!=27&&yellow_position[a]!=35&&yellow_position[a]!=40&&yellow_position[a]!=48)
               {
-                yellowblockleft[a]=1;
+                yellowblockleft[a]=-2;
                  int cc=0;
                  for(int i=0;i<4;i++)
                  {
@@ -417,7 +417,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
       }}
       else if(green_position[a]!=1&&green_position[a]!=9&&green_position[a]!=14&&green_position[a]!=22&&green_position[a]!=27&&green_position[a]!=35&&green_position[a]!=40&&green_position[a]!=48)
       {
-        greenblockleft[a]=1;
+        greenblockleft[a]=-2;
         int cc=0;
         for(int i=0;i<4;i++)
       {
@@ -538,19 +538,19 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
          next_turn();
          dice_index=0;
        }
-      else if(turn=='blue'&&blue_position[0]==58&&blue_position[1]==59&&blue_position[2]==60&&blue_position[3]==61&&dice!=6)
+      else if(turn=='blue'&&(blue_position[0]==58||blue_position[0]==57||blue_position[0]+dice>57)&&((blue_position[1]==59||blue_position[1]==57||blue_position[1]+dice>57)&&(blue_position[2]==60||blue_position[2]==57||blue_position[2]+dice>57)&&(blue_position[3]==61||blue_position[3]==57||blue_position[3]+dice>57)&&dice!=6))
       {
         next_turn();
       }
-      else if(turn=='red'&&red_position[0]==58&&red_position[1]==59&&red_position[2]==60&&red_position[3]==61&&dice!=6)
+      else if(turn=='red'&&(red_position[0]==58||red_position[0]==57||red_position[0]+dice>57)&&((red_position[1]==59||red_position[1]==57||red_position[1]+dice>57)&&(red_position[2]==60||red_position[2]==57||red_position[2]+dice>57)&&(red_position[3]==61||red_position[3]==57||red_position[3]+dice>57)&&dice!=6))
       {
         next_turn();
       }
-      else if(turn=='yellow'&&yellow_position[0]==58&&yellow_position[1]==59&&yellow_position[2]==60&&yellow_position[3]==61&&dice!=6)
+      else if(turn=='yellow'&&(yellow_position[0]==58||yellow_position[0]==57||yellow_position[0]+dice>57)&&((yellow_position[1]==59||yellow_position[1]==57||yellow_position[1]+dice>57)&&(yellow_position[2]==60||yellow_position[2]==57||yellow_position[2]+dice>57)&&(yellow_position[3]==61||yellow_position[3]==57||yellow_position[3]+dice>57)&&dice!=6))
       {
         next_turn();
       }
-      else if(turn=='green'&&green_position[0]==58&&green_position[1]==59&&green_position[2]==60&&green_position[3]==61&&dice!=6)
+      else if(turn=='green'&&(green_position[0]==58||green_position[0]==57||green_position[0]+dice>57)&&((green_position[1]==59||green_position[1]==57||green_position[1]+dice>57)&&(green_position[2]==60||green_position[2]==57||green_position[2]+dice>57)&&(green_position[3]==61||green_position[3]==57||green_position[3]+dice>57)&&dice!=6))
       {
         next_turn();
       }
@@ -702,7 +702,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                            duration:Duration(milliseconds: 500),
                            child:InkWell(
                                           onTap: turn=='red'&&dice_index==1 ? (){red_animation(i);} : null,
-                                          child:LudoPawn(size: blocksize, color: Colors.red)
+                                          child:LudoPawn(size: blocksize*1.2, color: Colors.red)
                                           )
                                           ),
                             
@@ -715,7 +715,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                            duration:Duration(milliseconds: 500),
                             child:InkWell(
                                     onTap: turn=='blue'&&dice_index==1 ? (){blue_animation(i);} : null,
-                                    child:LudoPawn(size: blocksize, color: Colors.blue)
+                                    child:LudoPawn(size: blocksize*1.2, color: Colors.blue)
                                     )),
                               //green
                      for(int i=0;i<4;i++)
@@ -725,7 +725,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                          duration:Duration(milliseconds: 500),
                          child: InkWell(
                                     onTap: turn=='green'&&dice_index==1 ? (){green_animation(i);} : null,
-                                    child:LudoPawn(size: blocksize, color: Colors.green)
+                                    child:LudoPawn(size: blocksize*1.2, color: Colors.green)
                                     )
                                     ),
                               //yellow
@@ -736,7 +736,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                      duration:Duration(milliseconds: 500),
                      child:InkWell(
                                     onTap: turn=='yellow'&&dice_index==1 ? (){yellow_animation(i);} : null,
-                                    child:LudoPawn(size: blocksize, color: Colors.yellow)
+                                    child:LudoPawn(size: blocksize*1.2, color: Colors.yellow)
                      )
                      )
 
@@ -763,7 +763,7 @@ class _fourplayerState extends State<fourplayer> with SingleTickerProviderStateM
                    },
                  ),)
                  else   SizedBox(width: blocksize*3,height: blocksize*3,),
-              SizedBox(width: _width-blocksize*7,),
+              SizedBox(width: _width-blocksize*8,),
               if(turn=='yellow')
              Container(
                      height: blocksize*3,
